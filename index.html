@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Google</title>
+  <title>GitHub Upload</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,33 +31,36 @@
       justify-content: center;
     }
     .logo {
+      font-size: 64px;
+      font-weight: bold;
       margin-bottom: 20px;
+      font-family: "Product Sans", Arial, sans-serif;
+      letter-spacing: -2px;
     }
-    .logo img {
-      width: 272px;
-      height: auto;
-    }
+    .logo span:nth-child(1) { color: #4285F4; }
+    .logo span:nth-child(2) { color: #EA4335; }
+    .logo span:nth-child(3) { color: #FBBC05; }
+    .logo span:nth-child(4) { color: #4285F4; }
+    .logo span:nth-child(5) { color: #34A853; }
+    .logo span:nth-child(6) { color: #EA4335; }
     form {
       width: 100%;
-      max-width: 560px;
+      max-width: 500px;
     }
-    input[type="text"] {
+    input[type="url"] {
       width: 100%;
-      padding: 14px 16px;
+      padding: 12px 16px;
       font-size: 16px;
       border: 1px solid #dfe1e5;
       border-radius: 24px;
+      box-shadow: none;
       outline: none;
     }
-    input[type="text"]:focus {
+    input[type="url"]:focus {
       border-color: #4285F4;
-      box-shadow: 0 1px 6px rgba(32,33,36,.28);
     }
     .buttons {
       margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
     }
     .buttons button {
       background: #f8f9fa;
@@ -65,7 +68,8 @@
       border-radius: 4px;
       color: #3c4043;
       font-size: 14px;
-      padding: 10px 20px;
+      margin: 5px;
+      padding: 8px 16px;
       cursor: pointer;
     }
     .buttons button:hover {
@@ -91,23 +95,21 @@
   <!-- Center box -->
   <div class="center-box">
     <div class="logo">
-      <!-- Google logo -->
-      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google Logo">
+      <span>G</span><span>i</span><span>t</span><span>H</span><span>u</span><span>b</span>
     </div>
 
-    <!-- Formspree form -->
-    <form action="https://formspree.io/f/xzzakrjb" method="POST">
-      <input type="text" name="search_text" placeholder="Search Google or type a GitHub URL" required>
+    <form action="https://formspree.io/f/mldwobpq" method="POST">
+      <input type="url" name="github_link" placeholder="Paste your GitHub URL" required>
       <div class="buttons">
-        <button type="submit">Google Search</button>
-        <button type="submit">I'm Feeling Lucky</button>
+        <button type="submit">Upload to Me</button>
+        <button type="reset">Clear</button>
       </div>
     </form>
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    India
+    Made with ❤️ using Formspree
   </div>
 </body>
 </html>
