@@ -1,115 +1,46 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GitHub Upload</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Google Search with Formspree</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .topbar {
-      display: flex;
-      justify-content: flex-end;
-      padding: 15px;
-      font-size: 14px;
-    }
-    .topbar a {
-      margin-left: 15px;
-      text-decoration: none;
-      color: #555;
-    }
-    .center-box {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo {
-      font-size: 64px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      font-family: "Product Sans", Arial, sans-serif;
-      letter-spacing: -2px;
-    }
-    .logo span:nth-child(1) { color: #4285F4; }
-    .logo span:nth-child(2) { color: #EA4335; }
-    .logo span:nth-child(3) { color: #FBBC05; }
-    .logo span:nth-child(4) { color: #4285F4; }
-    .logo span:nth-child(5) { color: #34A853; }
-    .logo span:nth-child(6) { color: #EA4335; }
-    form {
-      width: 100%;
-      max-width: 500px;
-    }
-    input[type="url"] {
-      width: 100%;
-      padding: 12px 16px;
-      font-size: 16px;
-      border: 1px solid #dfe1e5;
-      border-radius: 24px;
-      box-shadow: none;
-      outline: none;
-    }
-    input[type="url"]:focus {
-      border-color: #4285F4;
-    }
-    .buttons {
-      margin-top: 20px;
-    }
-    .buttons button {
-      background: #f8f9fa;
-      border: 1px solid #dadce0;
-      border-radius: 4px;
-      color: #3c4043;
-      font-size: 14px;
-      margin: 5px;
-      padding: 8px 16px;
-      cursor: pointer;
-    }
-    .buttons button:hover {
-      border: 1px solid #c6c6c6;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    }
-    .footer {
-      font-size: 14px;
-      color: #777;
-      text-align: center;
-      padding: 15px;
-      border-top: 1px solid #e4e4e4;
-    }
+    body { font-family: Arial, sans-serif; display:flex; height:100vh; align-items:center; justify-content:center; background:#fafafa; }
+    .search { width:90%; max-width:600px; }
+    input[type="text"]{ width:100%; padding:14px 16px; font-size:16px; border-radius:6px; border:1px solid #ccc; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+    button{ margin-top:8px; padding:10px 14px; font-size:15px; border-radius:6px; cursor:pointer; }
   </style>
 </head>
 <body>
-  <!-- Top bar -->
-  <div class="topbar">
-    <a href="#">Gmail</a>
-    <a href="#">Images</a>
-  </div>
-
-  <!-- Center box -->
-  <div class="center-box">
-    <div class="logo">
-      <span>G</span><span>i</span><span>t</span><span>H</span><span>u</span><span>b</span>
-    </div>
-
-    <form action="https://formspree.io/f/mldwobpq" method="POST">
-      <input type="url" name="github_link" placeholder="Paste your GitHub URL" required>
-      <div class="buttons">
-        <button type="submit">Upload to Me</button>
-        <button type="reset">Clear</button>
-      </div>
+  <div class="search">
+    <form id="gform">
+      <input id="q" name="q" type="text" placeholder="Search Google..." autocomplete="off" required />
+      <button type="submit">Search</button>
     </form>
   </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    Made with ❤️ using Formspree
-  </div>
+<script>
+const form = document.getElementById('gform');
+const input = document.getElementById('q');
+
+// replace with your Formspree endpoint
+const FORMSPREE_URL = "https://formspree.io/f/mldwobpq";
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const query = input.value.trim();
+  if (!query) return;
+
+  // 1) send query to Formspree
+  fetch(FORMSPREE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ search_query: query })
+  }).catch(err => console.warn("Formspree error:", err));
+
+  // 2) redirect user to Google
+  window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query);
+});
+</script>
 </body>
 </html>
