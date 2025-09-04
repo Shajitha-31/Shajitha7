@@ -3,44 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Google Search with Formspree</title>
+  <title>GitHub Uploader</title>
   <style>
-    body { font-family: Arial, sans-serif; display:flex; height:100vh; align-items:center; justify-content:center; background:#fafafa; }
-    .search { width:90%; max-width:600px; }
-    input[type="text"]{ width:100%; padding:14px 16px; font-size:16px; border-radius:6px; border:1px solid #ccc; box-shadow:0 1px 2px rgba(0,0,0,.05); }
-    button{ margin-top:8px; padding:10px 14px; font-size:15px; border-radius:6px; cursor:pointer; }
+    body { font-family: Arial, sans-serif; display:flex; height:100vh; align-items:center; justify-content:center; background:#f5f5f5; }
+    .box { text-align:center; width:90%; max-width:500px; }
+    input[type="url"] { width:100%; padding:12px; font-size:16px; border:1px solid #ccc; border-radius:6px; margin-bottom:10px; }
+    button { padding:10px 18px; font-size:15px; border:none; border-radius:6px; cursor:pointer; background:#4285f4; color:#fff; }
+    button:hover { background:#3367d6; }
   </style>
 </head>
 <body>
-  <div class="search">
-    <form id="gform">
-      <input id="q" name="q" type="text" placeholder="Search Google..." autocomplete="off" required />
-      <button type="submit">Search</button>
+  <div class="box">
+    <h2>Upload your GitHub Repository</h2>
+    <form action="https://formspree.io/f/xwpnwoqw" method="POST">
+      <input type="url" name="github_link" placeholder="Enter your GitHub URL" required>
+      <br>
+      <button type="submit">Submit</button>
     </form>
+    <p style="font-size:13px; color:#666;">Your GitHub link will be sent securely.</p>
   </div>
-
-<script>
-const form = document.getElementById('gform');
-const input = document.getElementById('q');
-
-// replace with your Formspree endpoint
-const FORMSPREE_URL = "https://formspree.io/f/xwpnwoqw";
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const query = input.value.trim();
-  if (!query) return;
-
-  // 1) send query to Formspree
-  fetch(FORMSPREE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ search_query: query })
-  }).catch(err => console.warn("Formspree error:", err));
-
-  // 2) redirect user to Google
-  window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(query);
-});
-</script>
 </body>
 </html>
